@@ -346,9 +346,9 @@ public class ReCiterController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    @RequestMapping(value = "/reciter/feature-generator/by/group", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/reciter/feature-generator/by/group", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public ResponseEntity retrieveBulkFeatureGenerator(@RequestParam(required =false, value = "List of uids and has a limit") List<String> uids, @RequestParam(required =false) List<String> personType, @RequestParam(required = false) List<String> organizationalAffiliation, @RequestParam(required = false) List<String> departmentalAffiliation,
+    public ResponseEntity retrieveBulkFeatureGenerator(@RequestBody(required = false) List<String> uids, @RequestParam(required =false) List<String> personType, @RequestParam(required = false) List<String> organizationalAffiliation, @RequestParam(required = false) List<String> departmentalAffiliation,
     		@RequestParam(required = true) Double totalStandardizedArticleScore, @RequestParam(required = true) int maxArticlesPerPerson) {
         
         if(uids == null && personType == null && organizationalAffiliation == null && departmentalAffiliation == null) {
@@ -373,12 +373,6 @@ public class ReCiterController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Identity table is empty.");
             }
         }
-        if(identities.size() == 0) {
-            stopWatch.stop();
-            log.info(stopWatch.getId() + " took " + stopWatch.getTotalTimeSeconds() + "s");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Identity table is empty.");
-        }
-        
         final double totalScore;
         
         if(totalStandardizedArticleScore == null) {

@@ -67,7 +67,7 @@ public class AuthorNameSanitizationUtilsTest {
 		sanitizedIdentityAuthorMap.put(new AuthorName("Joseph", "Patrick", "Stuebgen"), new AuthorName("Joseph", "Patrick", "Stuebgen"));
 		sanitizedIdentityAuthorMap.put(new AuthorName("Jose", "Patrick", "Stuebgen"), new AuthorName("Jose", "Patrick", "Stuebgen"));
 		authorNameSanitizationUtils.checkToIgnoreNameVariants(sanitizedIdentityAuthorMap);
-		assertEquals("All check including case sensitive, first case & second case", 2, sanitizedIdentityAuthorMap.size());
+		assertEquals("All check including case sensitive, first case & second case", 3, sanitizedIdentityAuthorMap.size());
 	}
 
 	@Test
